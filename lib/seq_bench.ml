@@ -17,4 +17,3 @@ module Make (Queue : QUEUE) = struct
     |> Times.to_thruput_metrics ~n:n_msgs ~singular:"message"
          ~config:"one domain"
 end
-
