@@ -3,6 +3,7 @@
  (public_name saturn_benchmarks)
  (libraries
   saturn_lockfree
+  michael_scott_queue
   two_stack_queue
   stdlib_ds
   basic_stack

@@ -11,6 +11,9 @@ let benchmarks_seq =
     ( "One domain Saturn_lockfree Queue",
       let module Bench = Seq_bench.Make ((Saturn_lockfree.Queue : QUEUE)) in
       Bench.run_suite );
+    ( "One domain Optimized MS queue",
+      let module Bench = Seq_bench.Make ((Michael_scott_queue : QUEUE)) in
+      Bench.run_suite );
     ( "One domain Saturn_lockfree Two-stack Queue",
       let module Bench = Seq_bench.Make ((Two_stack_queue : QUEUE)) in
       Bench.run_suite );
@@ -35,6 +38,9 @@ let benchmarks_par =
       Bench.run_suite );
     ( "Parallel Saturn_lockfree Queue",
       let module Bench = Par_bench.Make ((Saturn_lockfree.Queue : QUEUE)) in
+      Bench.run_suite );
+    ( "Parallel Optimized MS queue",
+      let module Bench = Par_bench.Make ((Michael_scott_queue : QUEUE)) in
       Bench.run_suite );
     ( "Parallel Saturn_lockfree Two-stack Queue",
       let module Bench = Par_bench.Make ((Two_stack_queue : QUEUE)) in

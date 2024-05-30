@@ -1,0 +1,3 @@
+(library
+ (name michael_scott_queue)
+ (libraries backoff multicore-magic))
