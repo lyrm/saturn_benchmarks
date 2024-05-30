@@ -45,7 +45,7 @@ let benchmarks_par =
     ( "Parallel Atomic list ",
       let module Bench = Par_bench.Make ((Basic_stack : QUEUE)) in
       Bench.run_suite );
-    ( "Parallel Saturn_lockfree Stack with mutex ",
+    ( "Parallel Saturn_lockfree Stack",
       let module Bench = Par_bench.Make ((Saturn_lockfree.Stack : QUEUE)) in
       Bench.run_suite );
   ]
