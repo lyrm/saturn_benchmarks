@@ -20,9 +20,12 @@ let benchmarks_seq =
     ( "One domain Stdlib Stack with mutex ",
       let module Bench = Seq_bench.Make ((Stdlib_ds.Locked_stack : QUEUE)) in
       Bench.run_suite );
+    ( "One domain Atomic list ",
+      let module Bench = Seq_bench.Make ((Basic_stack : QUEUE)) in
+      Bench.run_suite );
     ( "One domain Saturn_lockfree Stack",
-    let module Bench = Seq_bench.Make ((Saturn_lockfree.Stack : QUEUE)) in
-    Bench.run_suite );
+      let module Bench = Seq_bench.Make ((Saturn_lockfree.Stack : QUEUE)) in
+      Bench.run_suite );
   ]
 
 let benchmarks_par =
@@ -36,14 +39,15 @@ let benchmarks_par =
     ( "Parallel Saturn_lockfree Two-stack Queue",
       let module Bench = Par_bench.Make ((Two_stack_queue : QUEUE)) in
       Bench.run_suite );
-
     ( "Parallel Stdlib Stack with mutex ",
-    let module Bench = Par_bench.Make ((Stdlib_ds.Locked_stack : QUEUE)) in
-    Bench.run_suite );
-
+      let module Bench = Par_bench.Make ((Stdlib_ds.Locked_stack : QUEUE)) in
+      Bench.run_suite );
+    ( "Parallel Atomic list ",
+      let module Bench = Par_bench.Make ((Basic_stack : QUEUE)) in
+      Bench.run_suite );
     ( "Parallel Saturn_lockfree Stack with mutex ",
-    let module Bench = Par_bench.Make ((Saturn_lockfree.Stack : QUEUE)) in
-    Bench.run_suite );
+      let module Bench = Par_bench.Make ((Saturn_lockfree.Stack : QUEUE)) in
+      Bench.run_suite );
   ]
 
 let () =

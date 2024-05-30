@@ -1,0 +1,6 @@
+(test
+ (package saturn_benchmarks)
+ (name stm_test)
+ (libraries basic_stack qcheck-core qcheck-stm.stm stm_run)
+ (enabled_if
+  (= %{arch_sixtyfour} true)))
