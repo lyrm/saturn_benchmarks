@@ -1,2 +1,2 @@
 # saturn_benchmarks
-Benchmarks for Saturn data structures
+Benchmarks for Saturn's data structures
