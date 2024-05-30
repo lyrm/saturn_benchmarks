@@ -1,0 +1,3 @@
+(library
+ (name two_stack_queue)
+ (libraries saturn_lockfree multicore-magic))

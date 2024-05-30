@@ -1,0 +1,5 @@
+(executable
+ (name saturn_benchmarks)
+ (public_name saturn_benchmarks)
+ (libraries saturn_lockfree two_stack_queue stdlib_ds multicore-bench)
+ (package saturn_benchmarks))

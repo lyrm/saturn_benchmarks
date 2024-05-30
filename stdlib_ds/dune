@@ -1,0 +1,3 @@
+(library
+ (name stdlib_ds)
+ (package saturn_benchmarks))
