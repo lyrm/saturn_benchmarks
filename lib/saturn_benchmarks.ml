@@ -23,7 +23,10 @@ let benchmarks_seq =
     ( "One domain Stdlib Stack with mutex ",
       let module Bench = Seq_bench.Make ((Stdlib_ds.Locked_stack : QUEUE)) in
       Bench.run_suite );
-    ( "One domain Atomic list ",
+    ( "One domain Atomic_list ",
+      let module Bench = Seq_bench.Make ((Basic_stack.Not_opti : QUEUE)) in
+      Bench.run_suite );
+    ( "One domain Opti_Atomic_list ",
       let module Bench = Seq_bench.Make ((Basic_stack : QUEUE)) in
       Bench.run_suite );
     ( "One domain Saturn_lockfree Stack",
@@ -48,7 +51,10 @@ let benchmarks_par =
     ( "Parallel Stdlib Stack with mutex ",
       let module Bench = Par_bench.Make ((Stdlib_ds.Locked_stack : QUEUE)) in
       Bench.run_suite );
-    ( "Parallel Atomic list ",
+    ( "Parallel Atomic_list ",
+      let module Bench = Par_bench.Make ((Basic_stack.Not_opti : QUEUE)) in
+      Bench.run_suite );
+    ( "Parallel Opti_Atomic_list ",
       let module Bench = Par_bench.Make ((Basic_stack : QUEUE)) in
       Bench.run_suite );
     ( "Parallel Saturn_lockfree Stack",

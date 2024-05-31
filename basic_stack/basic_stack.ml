@@ -33,3 +33,19 @@ let pop_opt q =
                 pop ~backoff q
         in
         pop ~backoff:Backoff.default q
+
+module Not_opti = struct
+  type 'a t = 'a list Atomic.t
+
+  let create () = Atomic.make []
+
+  let rec push q a =
+    let old = Atomic.get q in
+    if Atomic.compare_and_set q old (a :: old) then () else push q a
+
+  let rec pop_opt q =
+    let old = Atomic.get q in
+    match old with
+    | [] -> None
+    | x :: xs -> if Atomic.compare_and_set q old xs then Some x else pop_opt q
+end
