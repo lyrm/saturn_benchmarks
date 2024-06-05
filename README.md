@@ -1,5 +1,5 @@
 # Benchmarks for Saturn library.
-This repository put together benchmarks of queue and stacks for [Saturn](https://github.com/ocaml-multicore/saturn/)'s data structures. 
+This repository put together benchmarks for [Saturn's](https://github.com/ocaml-multicore/saturn/) data structures. 
 
 ## Running the benchmarks
 
