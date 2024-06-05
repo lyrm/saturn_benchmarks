@@ -8,6 +8,18 @@ The benchmarks can be run with
 dune exec -- ./lib/saturn_benchmarks.exe -budget 1
 ```
 
+You can print the help with `-help`
+```
+dune exec -- ./lib/saturn_benchmarks.exe -help
+```
+
+It will also print the names of all available benchmarks. You can filter the run benchmarks by adding some parts of their name at the end of the command line:
+```
+dune exec -- ./lib/saturn_benchmarks.exe -bugdet 1 Parallel Stdlib
+```
+will run all the benchmarks with *either* `Parallel` or `Stdlib` in their names.
+
+
 ## Queue implementations 
 Here is a list of queue implementations that can be compared  :
 - the `Stdlib` queue (with one domain only),
