@@ -1,23 +1,25 @@
 # Benchmarks for Saturn library.
 This repository put together benchmarks for [Saturn's](https://github.com/ocaml-multicore/saturn/) data structures. 
 
-## Running the benchmarks
 
-The benchmarks can be run with 
-```
-dune exec -- ./lib/saturn_benchmarks.exe -budget 1
-```
+## Running the Benchmarks
 
-You can print the help with `-help`
+To run the benchmarks, use the following command:
 ```
-dune exec -- ./lib/saturn_benchmarks.exe -help
+dune exec -- ./src/saturn_benchmarks.exe -budget 1
 ```
 
-It will also print the names of all available benchmarks. You can filter the run benchmarks by adding some parts of their name at the end of the command line:
+To print the help information, use the `-help` option:
 ```
-dune exec -- ./lib/saturn_benchmarks.exe -bugdet 1 Parallel Stdlib
+dune exec -- ./src/saturn_benchmarks.exe -help
 ```
-will run all the benchmarks with *either* `Parallel` or `Stdlib` in their names.
+
+This command will also display the names of all available benchmarks. You can filter the benchmarks to run by including part of their name at the end of the command line:
+```
+dune exec -- ./src/saturn_benchmarks.exe -budget 1 Parallel Stdlib
+```
+
+This will run all benchmarks with either `Parallel` or `Stdlib` in their names.
 
 
 ## Queue implementations 
