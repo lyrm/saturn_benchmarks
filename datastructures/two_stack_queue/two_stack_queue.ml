@@ -88,7 +88,7 @@ and push_with t value backoff counter prefix =
     let backoff = Backoff.once backoff in
     push t value backoff (Atomic.fenceless_get t.tail)
 
-let push t value = push t value Backoff.default (Atomic.fenceless_get t.tail)
+let push_exn t value = push t value Backoff.default (Atomic.fenceless_get t.tail)
 
 type ('a, _) poly = Option : ('a, 'a option) poly | Value : ('a, 'a) poly
 
@@ -157,7 +157,7 @@ and pop_emptyish_as : type a r. a t -> _ -> (a, r) poly -> (a, _) tdt -> r =
     match poly with Value -> raise_notrace Empty | Option -> None
   else pop_as t backoff poly new_head
 
-let pop t = pop_as t Backoff.default Value (Atomic.fenceless_get t.head)
+let pop_exn t = pop_as t Backoff.default Value (Atomic.fenceless_get t.head)
 let pop_opt t = pop_as t Backoff.default Option (Atomic.fenceless_get t.head)
 
 let rec length t =

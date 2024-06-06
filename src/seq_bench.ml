@@ -7,7 +7,7 @@ module Make (Queue : QUEUE) = struct
     let t = Queue.create () in
 
     let op push =
-      if push then Queue.push t 101 else Queue.pop_opt t |> ignore
+      if push then Queue.push_exn t 101 else Queue.pop_opt t |> ignore
     in
 
     let init _ = Util.generate_push_and_pop_sequence n_msgs in

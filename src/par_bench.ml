@@ -21,7 +21,7 @@ module Make (Queue : QUEUE) = struct
           let n = Util.alloc n_msgs_to_add in
           if 0 < n then begin
             for i = 1 to n do
-              Queue.push t i
+              Queue.push_exn t i
             done;
             work ()
           end

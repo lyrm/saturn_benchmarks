@@ -10,7 +10,7 @@ let pop_opt q =
   Mutex.unlock q.lock;
   res
 
-let push q a =
+let push_exn q a =
   Mutex.lock q.lock;
   push a q.stack;
   Mutex.unlock q.lock

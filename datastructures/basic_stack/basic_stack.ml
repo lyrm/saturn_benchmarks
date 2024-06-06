@@ -2,7 +2,7 @@ type 'a t = 'a list Atomic.t
 
 let create () = Atomic.make_contended []
 
-let push q a =
+let push_exn q a =
   let old = Atomic.get q in
   if Atomic.compare_and_set q old (a :: old) then ()
   else
@@ -39,9 +39,9 @@ module Not_opti = struct
 
   let create () = Atomic.make []
 
-  let rec push q a =
+  let rec push_exn q a =
     let old = Atomic.get q in
-    if Atomic.compare_and_set q old (a :: old) then () else push q a
+    if Atomic.compare_and_set q old (a :: old) then () else push_exn q a
 
   let rec pop_opt q =
     let old = Atomic.get q in

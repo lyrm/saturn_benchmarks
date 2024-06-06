@@ -1,3 +1,3 @@
 include Stdlib.Stack
 
-let push q a = push a q
+let push_exn q a = push a q

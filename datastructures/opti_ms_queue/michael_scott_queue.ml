@@ -59,7 +59,7 @@ let rec pop_as :
         pop_as head backoff poly
 
 let pop_opt t = pop_as t.head Backoff.default Option
-let pop t = pop_as t.head Backoff.default Value
+let pop_exn t = pop_as t.head Backoff.default Value
 
 let rec peek_as : type a r. (a, [ `Next ]) Node.t Atomic.t -> (a, r) poly -> r =
  fun head poly ->
@@ -73,7 +73,7 @@ let rec peek_as : type a r. (a, [ `Next ]) Node.t Atomic.t -> (a, r) poly -> r =
       else peek_as head poly
 
 let peek_opt t = peek_as t.head Option
-let peek t = peek_as t.head Value
+let peek_exn t = peek_as t.head Value
 
 let rec fix_tail tail new_tail backoff =
   let old_tail = Atomic.get tail in
@@ -93,7 +93,7 @@ let rec push tail link (Next _ as new_node : (_, [ `Next ]) Node.t) backoff =
         push tail link new_node backoff
   | Next _ as next -> push tail (Node.as_atomic next) new_node backoff
 
-let push { tail; _ } value =
+let push_exn { tail; _ } value =
   let (Next _ as new_node : (_, [ `Next ]) Node.t) = Node.make value in
   let old_tail = Atomic.get tail in
   let link = Node.as_atomic old_tail in

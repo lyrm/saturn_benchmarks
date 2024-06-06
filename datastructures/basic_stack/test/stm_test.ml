@@ -29,7 +29,7 @@ module Spec = struct
 
   let run c d =
     match c with
-    | Push i -> Res (unit, Stack.push d i)
+    | Push i -> Res (unit, Stack.push_exn d i)
     | Pop -> Res (option int, Stack.pop_opt d)
 
   let postcond c (s : state) res =

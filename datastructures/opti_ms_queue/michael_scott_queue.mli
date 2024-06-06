@@ -34,13 +34,13 @@ val create : unit -> 'a t
 val is_empty : 'a t -> bool
 (** [is_empty q] returns empty if [q] is empty. *)
 
-val push : 'a t -> 'a -> unit
+val push_exn : 'a t -> 'a -> unit
 (** [push q v] adds the element [v] at the end of the queue [q]. *)
 
 exception Empty
 (** Raised when {!pop} or {!peek} is applied to an empty queue. *)
 
-val pop : 'a t -> 'a
+val pop_exn : 'a t -> 'a
 (** [pop q] removes and returns the first element in queue [q].
 
     @raise Empty if [q] is empty. *)
@@ -49,7 +49,7 @@ val pop_opt : 'a t -> 'a option
 (** [pop_opt q] removes and returns the first element in queue [q], or
     returns [None] if the queue is empty. *)
 
-val peek : 'a t -> 'a
+val peek_exn : 'a t -> 'a
 (** [peek q] returns the first element in queue [q].
 
     @raise Empty if [q] is empty. *)
