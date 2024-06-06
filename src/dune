@@ -8,5 +8,6 @@
   michael_scott_queue
   two_stack_queue
   stdlib_ds
-  basic_stack)
+  basic_stack
+  spsc_queues)
  (package saturn_benchmarks))
