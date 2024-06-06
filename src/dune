@@ -3,9 +3,10 @@
  (public_name saturn_benchmarks)
  (libraries
   saturn_lockfree
+  multicore-magic
+  multicore-bench
   michael_scott_queue
   two_stack_queue
   stdlib_ds
-  basic_stack
-  multicore-bench)
+  basic_stack)
  (package saturn_benchmarks))
