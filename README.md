@@ -36,3 +36,21 @@ The stack implementations benchmarked are
 - the `Stdlib` stack protected with a mutex,
 - a concurrent stack implemented with an atomic list (with and without padding and backoff mechanism)
 - a lock-free Treiber stack from `Saturn`.
+
+
+## Single-consumer single-producer queues : different optimizations
+The following command line runs benchmarks for a single-consumer single-producer queue with different optimizations. 
+```
+dune exec -- ./src/saturn_benchmarks.exe -budget 1 Spsc
+```
+The different benchmarked optimizations are (with results on Intel computer 12th Gen Intel® Core™ i7-1270P × 16):
+| Implementations                                             | Notes                                                                                                                                       | Results on intel (Millons message/s) |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| Spsc_queue Original                                         | Original spsc implementation with no optimzation                                                                                            | 14 M/s                 |
+| Spsc_queue Original + padding                               | Same than previous with padding to avoid false sharing                                                                                      | 14 M/s                 |
+| Spsc_queue Saturn spsc queue - padding                      | Differences from original : add caches tail and head (but no padding). Differences from `Saturn.Single_cons_single_prod_queue` : no padding | 18 M/s                 |
+| Spsc_queue Saturn                                           | `Saturn.Single_cons_single_prod_queue`                                                                                                      | 60 M/s                 |
+| Spsc_queue Saturn + padding                                 | `Saturn.Single_cons_single_prod_queue` with full padding using `Multicore_magic.copy_as_padded`                                             | 63 M/s                 |
+| Spsc_queue Saturn + padding + relaxed read                  | Same than previous with relaxed atomic read.                                                                                                | 56 M/s                 |
+| Spsc_queue Saturn + padding + relaxed read + no indirection | Same than previous with no option in array (using `Obj.magic`) to avoid `Option` indirection.                                               | 93 M/s                 |
+| Spsc_queue Saturn_unsafe                                    | `Saturn.Single_cons_single_prod_queue_unsafe`. Differences from previous line : avoid float array optimisation.                             | 102 M/s                |
