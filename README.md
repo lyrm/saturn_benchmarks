@@ -38,7 +38,7 @@ The stack implementations benchmarked are
 - a lock-free Treiber stack from `Saturn`.
 
 
-## Single-consumer single-producer queues : different optimizations
+## Single-consumer single-producer queue: different optimizations
 The following command line runs benchmarks for a single-consumer single-producer queue with different optimizations. 
 ```
 dune exec -- ./src/saturn_benchmarks.exe -budget 1 Spsc

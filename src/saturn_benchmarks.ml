@@ -1,3 +1,5 @@
+[@@@ocaml.warning "-32"]
+
 open Data_intf
 
 module Saturn_queue : QUEUE = struct
@@ -24,8 +26,11 @@ let benchmarks_seq =
     ( name "Saturn_lockfree.Queue",
       let module Bench = Seq_bench.Make ((Saturn_queue : QUEUE)) in
       Bench.run_suite );
-    ( name "Optimized_MS_queue",
-      let module Bench = Seq_bench.Make ((Michael_scott_queue : QUEUE)) in
+      ( name "Safe_Michael_Scott_Queue",
+      let module Bench = Seq_bench.Make ((Ms_queues.Safe_michael_scott_queue : QUEUE)) in
+      Bench.run_suite );
+      ( name "Optimized_Michael_Scott_Queue",
+      let module Bench = Seq_bench.Make ((Ms_queues.Opti_michael_scott_queue : QUEUE)) in
       Bench.run_suite );
     ( name "Saturn_lockfree_Two-stack_Queue",
       let module Bench = Seq_bench.Make ((Two_stack_queue : QUEUE)) in
@@ -56,8 +61,11 @@ let benchmarks_par =
     ( name "Saturn_lockfree_Queue",
       let module Bench = Par_bench.Make ((Saturn_queue : QUEUE)) in
       Bench.run_suite );
-    ( name "Optimized_MS_queue",
-      let module Bench = Par_bench.Make ((Michael_scott_queue : QUEUE)) in
+    ( name "Safe_Michael_Scott_Queue",
+      let module Bench = Par_bench.Make ((Ms_queues.Safe_michael_scott_queue : QUEUE)) in
+      Bench.run_suite );
+    ( name "Optimized_Michael_Scott_Queue",
+      let module Bench = Par_bench.Make ((Ms_queues.Opti_michael_scott_queue : QUEUE)) in
       Bench.run_suite );
     ( name "Saturn_lockfree_Two-stack_Queue",
       let module Bench = Par_bench.Make ((Two_stack_queue : QUEUE)) in
@@ -115,5 +123,8 @@ let benchmarks_spsc =
 
 let () =
   Multicore_bench.Cmd.run
-    ~benchmarks:(benchmarks_seq @ benchmarks_par @ benchmarks_spsc)
+    ~benchmarks:(benchmarks_seq 
+    @ benchmarks_par 
+    (* @ benchmarks_spsc *)
+    )
     ()

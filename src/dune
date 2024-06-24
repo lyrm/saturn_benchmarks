@@ -5,7 +5,7 @@
   saturn_lockfree
   multicore-magic
   multicore-bench
-  michael_scott_queue
+  ms_queues
   two_stack_queue
   stdlib_ds
   basic_stack

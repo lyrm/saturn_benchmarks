@@ -1,0 +1,3 @@
+module Opti_michael_scott_queue = Opti_michael_scott_queue
+
+module Safe_michael_scott_queue = Safe_ms_queue
