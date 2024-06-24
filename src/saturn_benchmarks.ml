@@ -113,7 +113,19 @@ let benchmarks_spsc =
       Bench.run_suite );
   ]
 
+  let benchmarks_skiplist = 
+    let open Skiplist in 
+    let name benchname = "Skiplist " ^ benchname in
+    [
+      ( name "original",
+        let module Bench = Skiplist_bench.Make ((Saturn_skiplist : SKIPLIST)) in
+        Bench.run_suite );
+      ( name "with atomic array",
+        let module Bench = Skiplist_bench.Make ((Skiplist_with_atoarr : SKIPLIST)) in
+        Bench.run_suite );
+    ]
+
 let () =
   Multicore_bench.Cmd.run
-    ~benchmarks:(benchmarks_seq @ benchmarks_par @ benchmarks_spsc)
+    ~benchmarks:(benchmarks_seq @ benchmarks_par @ benchmarks_spsc @ benchmarks_skiplist)
     ()

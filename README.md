@@ -54,3 +54,14 @@ The different benchmarked optimizations are (with results on Intel computer 12th
 | Spsc_queue Saturn + padding + relaxed read                  | Same than previous with relaxed atomic read.                                                                                                | 56 M/s                 |
 | Spsc_queue Saturn + padding + relaxed read + no indirection | Same than previous with no option in array (using `Obj.magic`) to avoid `Option` indirection.                                               | 93 M/s                 |
 | Spsc_queue Saturn_unsafe                                    | `Saturn.Single_cons_single_prod_queue_unsafe`. Differences from previous line : avoid float array optimisation.                             | 102 M/s                |
+
+
+## Skiplist
+Two skiplists implementations are benchmarked here: 
+- one that is the current Saturn implementation ;
+- one that uses `Atomic_array` from `Multicore_magic`. 
+
+To run specifically these benchmarks :
+```
+dune exec -- ./src/saturn_benchmarks.exe -budget 1 -brief Skiplist
+```

@@ -1,0 +1,4 @@
+(library
+ (name skiplist)
+ (libraries backoff multicore-magic saturn_lockfree)
+ (package saturn_benchmarks))

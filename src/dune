@@ -9,5 +9,6 @@
   two_stack_queue
   stdlib_ds
   basic_stack
+  skiplist
   spsc_queues)
  (package saturn_benchmarks))
