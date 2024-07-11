@@ -42,34 +42,37 @@ let rec pop_as :
  fun head backoff poly ->
   let old_head = Atomic.get head in
   match Atomic.get old_head with
-  | Nil -> begin match poly with Option -> None | Value -> raise Empty end
-  | Next (r, next) ->
+  | Nil -> begin match poly with Value -> raise Empty | Option -> None end
+  | Next (value, next) ->
       if Atomic.compare_and_set head old_head next then begin
-        match poly with Value -> r | Option -> Some r
+        match poly with Value -> value | Option -> Some value
       end
       else
         let backoff = Backoff.once backoff in
         pop_as head backoff poly
 
-let pop_opt t = pop_as t.head Backoff.default Option
 let pop_exn t = pop_as t.head Backoff.default Value
+let pop_opt t = pop_as t.head Backoff.default Option
 
-let rec peek_as : type a r. a node Atomic.t Atomic.t -> (a, r) poly -> r =
+let peek_as : type a r. a node Atomic.t Atomic.t -> (a, r) poly -> r =
  fun head poly ->
   let old_head = Atomic.get head in
   match Atomic.get old_head with
-  | Nil -> begin match poly with Option -> None | Value -> raise Empty end
-  | Next (r, _) -> ( match poly with Value -> r | Option -> Some r)
+  | Nil -> begin
+      match poly with Value -> raise Empty | Option -> raise Empty
+    end
+  | Next (value, _) -> (
+      match poly with Value -> value | Option -> Some value)
 
 let peek_opt t = peek_as t.head Option
 let peek_exn t = peek_as t.head Value
 
-let rec fix_tail tail new_tail backoff =
+let rec fix_tail tail new_tail =
   let old_tail = Atomic.get tail in
   if
     Atomic.get new_tail == Nil
     && not (Atomic.compare_and_set tail old_tail new_tail)
-  then fix_tail tail new_tail (Backoff.once backoff)
+  then fix_tail tail new_tail
 
 let push_exn { tail; _ } value =
   let rec find_tail_and_enq curr_end node =
@@ -83,5 +86,4 @@ let push_exn { tail; _ } value =
   let old_tail = Atomic.get tail in
   find_tail_and_enq old_tail newnode;
   if not (Atomic.compare_and_set tail old_tail new_tail) then
-    let backoff = Backoff.once Backoff.default in
-    fix_tail tail new_tail backoff
+    fix_tail tail new_tail
