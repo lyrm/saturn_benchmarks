@@ -36,10 +36,10 @@ let benchmarks_seq =
     ( name "protected_Stdlib.Stack",
       let module Bench = Seq_bench.Make ((Stdlib_ds.Locked_stack : QUEUE)) in
       Bench.run_suite );
-    ( name "Atomic_list",
+    ( name "Atomic_list_Stack",
       let module Bench = Seq_bench.Make ((Basic_stack.Not_opti : QUEUE)) in
       Bench.run_suite );
-    ( name "Optimed_Atomic_list",
+    ( name "Optimed_Atomic_list_Stack",
       let module Bench = Seq_bench.Make ((Basic_stack : QUEUE)) in
       Bench.run_suite );
     ( name "Saturn_lockfree.Stack",
@@ -65,10 +65,10 @@ let benchmarks_par =
     ( name "Stdlib_Stack_with_mutex",
       let module Bench = Par_bench.Make ((Stdlib_ds.Locked_stack : QUEUE)) in
       Bench.run_suite );
-    ( name "Atomic_list",
+    ( name "Atomic_list_Stack",
       let module Bench = Par_bench.Make ((Basic_stack.Not_opti : QUEUE)) in
       Bench.run_suite );
-    ( name "Optized_Atomic_list",
+    ( name "Optized_Atomic_list_Stack",
       let module Bench = Par_bench.Make ((Basic_stack : QUEUE)) in
       Bench.run_suite );
     ( name "Saturn_lockfree_Stack",
@@ -88,7 +88,7 @@ let benchmarks_spsc =
       let module Bench = Spsc_queue_bench.Make ((
         Spsc_queue_with_padding : SPSC_QUEUE)) in
       Bench.run_suite );
-    ( name "Saturn spsc queue - padding",
+    ( name "Saturn - padding",
       let module Bench = Spsc_queue_bench.Make ((
         Saturn_spsc_queue_no_padding : SPSC_QUEUE)) in
       Bench.run_suite );
