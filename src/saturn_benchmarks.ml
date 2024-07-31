@@ -83,6 +83,10 @@ let benchmarks_par =
       let module Bench = Par_bench.Make ((
         Ms_queues.Michael_scott_queue_1 : QUEUE)) in
       Bench.run_suite );
+    ( name "Michael_Scott_Queue_raw+pop_as+inlined_push",
+      let module Bench = Par_bench.Make ((
+        Ms_queues.Michael_scott_queue_2 : QUEUE)) in
+      Bench.run_suite );
     ( name "Michael_Scott_Queue_raw+pop_as+gadt+push_backoff",
       let module Bench = Par_bench.Make ((
         Ms_queues.Michael_scott_queue_3 : QUEUE)) in
