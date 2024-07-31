@@ -88,25 +88,25 @@ let benchmarks_spsc =
       let module Bench = Spsc_queue_bench.Make ((
         Spsc_queue_with_padding : SPSC_QUEUE)) in
       Bench.run_suite );
-    ( name "Saturn - padding",
-      let module Bench = Spsc_queue_bench.Make ((
-        Saturn_spsc_queue_no_padding : SPSC_QUEUE)) in
-      Bench.run_suite );
+    (* ( name "Saturn - padding",
+       let module Bench = Spsc_queue_bench.Make ((
+         Saturn_spsc_queue_no_padding : SPSC_QUEUE)) in
+       Bench.run_suite ); *)
     ( name "Saturn",
       let module Bench = Spsc_queue_bench.Make ((Saturn_spsc_queue : SPSC_queue)) in
       Bench.run_suite );
-    ( name "Saturn + padding",
-      let module Bench = Spsc_queue_bench.Make ((
-        Saturn_spsc_queue_with_full_padding : SPSC_QUEUE)) in
-      Bench.run_suite );
-    ( name "Saturn + padding + relaxed read",
-      let module Bench = Spsc_queue_bench.Make ((
-        Saturn_spsc_queue_with_padding_relaxed_read : SPSC_QUEUE)) in
-      Bench.run_suite );
-    ( name "Saturn + padding + relaxed read + no indirection",
-      let module Bench = Spsc_queue_bench.Make ((
-        Saturn_spsc_with_padding_relaxed_option : SPSC_QUEUE)) in
-      Bench.run_suite );
+    (* ( name "Saturn + padding",
+       let module Bench = Spsc_queue_bench.Make ((
+         Saturn_spsc_queue_with_full_padding : SPSC_QUEUE)) in
+       Bench.run_suite ); *)
+    (* ( name "Saturn + padding + relaxed read",
+         let module Bench = Spsc_queue_bench.Make ((
+           Saturn_spsc_queue_with_padding_relaxed_read : SPSC_QUEUE)) in
+         Bench.run_suite );
+       ( name "Saturn + padding + relaxed read + no indirection",
+         let module Bench = Spsc_queue_bench.Make ((
+           Saturn_spsc_with_padding_relaxed_option : SPSC_QUEUE)) in
+         Bench.run_suite ); *)
     ( name "Saturn_unsafe",
       let module Bench = Spsc_queue_bench.Make ((
         Saturn_spsc_queue_unsafe : SPSC_QUEUE)) in
