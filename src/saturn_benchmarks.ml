@@ -6,6 +6,12 @@ module Saturn_queue : QUEUE = struct
   let push_exn = push
 end
 
+module Saturn_queue_unsafe : QUEUE = struct
+  include Saturn_lockfree.Queue_unsafe
+
+  let push_exn = push
+end
+
 module Saturn_stack : QUEUE = struct
   include Saturn_lockfree.Stack
 
@@ -24,8 +30,8 @@ let benchmarks_seq =
     ( name "Saturn_lockfree.Queue",
       let module Bench = Seq_bench.Make ((Saturn_queue : QUEUE)) in
       Bench.run_suite );
-    ( name "Optimized_MS_queue",
-      let module Bench = Seq_bench.Make ((Michael_scott_queue : QUEUE)) in
+    ( name "Saturn_lockfree.Queue_unsafe",
+      let module Bench = Seq_bench.Make ((Saturn_queue_unsafe : QUEUE)) in
       Bench.run_suite );
     ( name "Saturn_lockfree_Two-stack_Queue",
       let module Bench = Seq_bench.Make ((Two_stack_queue : QUEUE)) in
@@ -56,8 +62,11 @@ let benchmarks_par =
     ( name "Saturn_lockfree_Queue",
       let module Bench = Par_bench.Make ((Saturn_queue : QUEUE)) in
       Bench.run_suite );
-    ( name "Optimized_MS_queue",
-      let module Bench = Par_bench.Make ((Michael_scott_queue : QUEUE)) in
+    (* ( name "Optimized_MS_queue",
+       let module Bench = Par_bench.Make ((Michael_scott_queue : QUEUE)) in
+       Bench.run_suite ); *)
+    ( name "Saturn_lockfree.Queue_unsafe",
+      let module Bench = Par_bench.Make ((Saturn_queue_unsafe : QUEUE)) in
       Bench.run_suite );
     ( name "Saturn_lockfree_Two-stack_Queue",
       let module Bench = Par_bench.Make ((Two_stack_queue : QUEUE)) in
