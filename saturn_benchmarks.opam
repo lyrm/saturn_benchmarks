@@ -12,7 +12,7 @@ bug-reports: "https://github.com/lyrm/saturn_benchmarks/issues"
 depends: [
   "ocaml" {>= "5.2.0"}
   "dune" {>= "3.15" & >= "3.15"}
-  "saturn" {= "~dev"}
+  "saturn" {>= "1.0.0"}
   "backoff" {>= "0.1.0"}
   "qcheck-stm" {>= "0.3" & with-test}
   "multicore-magic" {>= "2.1.0"}

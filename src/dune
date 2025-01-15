@@ -2,7 +2,7 @@
  (name saturn_benchmarks)
  (public_name saturn_benchmarks)
  (libraries
-  saturn_lockfree
+  saturn
   multicore-magic
   multicore-bench
   michael_scott_queue

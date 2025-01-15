@@ -107,4 +107,4 @@ let peek_exn { array; head; tail; _ } =
     let v = Array.get array @@ (head_val land (Array.length array - 1)) in
     match v with None -> assert false | Some v -> v
 
-let size { head; tail; _ } = Atomic.get tail - Atomic.get head
+let length { head; tail; _ } = Atomic.get tail - Atomic.get head

@@ -21,13 +21,12 @@
  * https://dl.acm.org/doi/pdf/10.1145/3437801.3441583
  *)
 
-
 type 'a t = {
   array : 'a Option.t Array.t;
   tail : int Atomic.t;
-  tail_cache : int ref ;
+  tail_cache : int ref;
   head : int Atomic.t;
-  head_cache : int ref  ;
+  head_cache : int ref;
 }
 
 exception Full
@@ -97,7 +96,7 @@ let pop_opt t = pop_or_peek_as t Pop Option
 let peek_exn t = pop_or_peek_as t Peek Value
 let peek_opt t = pop_or_peek_as t Peek Option
 
-let size t =
+let length t =
   let tail = Atomic.get t.tail in
   let head = Atomic.get t.head in
   tail - head

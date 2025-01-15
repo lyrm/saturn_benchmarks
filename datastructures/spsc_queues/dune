@@ -1,5 +1,5 @@
 (library 
  (name spsc_queues)
- (libraries backoff multicore-magic saturn_lockfree)
+ (libraries backoff multicore-magic saturn)
  (package saturn_benchmarks)
 )

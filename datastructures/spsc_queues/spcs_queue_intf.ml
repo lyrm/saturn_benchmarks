@@ -9,8 +9,8 @@ module type SPSC_queue = sig
   (** [create ~size_exponent:int] returns a new queue of maximum size
       [2^size_exponent] and initially empty. *)
 
-  val size : 'a t -> int
-  (** [size] returns the size of the queue.  This method linearizes only when
+  val length : 'a t -> int
+  (** [length] returns the size of the queue.  This method linearizes only when
       called from either consumer or producer domain.  Otherwise, it is safe to
       call but provides only an *indication* of the size of the structure. *)
 

@@ -24,7 +24,7 @@
  (depends 
   (ocaml (>= 5.2.0))
   (dune (>= 3.15))
-  (saturn (= ~dev))
+  (saturn (>= 1.0.0))
   (backoff (and (>= 0.1.0)))
   (qcheck-stm (and (>= 0.3) :with-test))
   (multicore-magic (and (>= 2.1.0)))

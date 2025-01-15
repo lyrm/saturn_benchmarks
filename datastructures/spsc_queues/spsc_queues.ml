@@ -9,8 +9,7 @@ module Spsc_queue_with_padding : SPSC_QUEUE = Padded_spsc_queue
 module Saturn_spsc_queue_no_padding : SPSC_QUEUE = Saturn_spsc_without_padding
 (** Saturn Spsc queue without padding*)
 
-module Saturn_spsc_queue : SPSC_QUEUE =
-  Saturn_lockfree.Single_prod_single_cons_queue
+module Saturn_spsc_queue : SPSC_QUEUE = Saturn.Single_prod_single_cons_queue
 (** Spsc queue from Saturn *)
 
 module Saturn_spsc_queue_with_full_padding : SPSC_QUEUE =
@@ -26,4 +25,4 @@ module Saturn_spsc_with_padding_relaxed_option : SPSC_QUEUE =
 (** Saturn Spsc queue with padding, relaxed read and without indirection in array*)
 
 module Saturn_spsc_queue_unsafe : SPSC_QUEUE =
-  Saturn_lockfree.Single_prod_single_cons_queue_unsafe
+  Saturn.Single_prod_single_cons_queue_unsafe

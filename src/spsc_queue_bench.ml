@@ -7,7 +7,7 @@ module Make (Queue : SPSC_queue) = struct
     let t = Queue.create ~size_exponent in
 
     let before () =
-      while Queue.size t <> 0 do
+      while Queue.length t <> 0 do
         Queue.pop_exn t |> ignore
       done;
       let n = Random.int ((1 lsl size_exponent) + 1) in
@@ -46,7 +46,7 @@ module Make (Queue : SPSC_queue) = struct
     |> Times.to_thruput_metrics ~n:n_msgs ~singular:"message" ~config
 
   let run_suite ~budgetf =
-    [ (*0; 3; 6; 9; 12; *)15 ]
+    [ (*0; 3; 6; 9; 12; *) 15 ]
     |> List.concat_map @@ fun size_exponent ->
        run_one ~budgetf ~size_exponent ()
 end

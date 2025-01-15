@@ -1,19 +1,19 @@
 open Data_intf
 
 module Saturn_queue : QUEUE = struct
-  include Saturn_lockfree.Queue
+  include Saturn.Queue
 
   let push_exn = push
 end
 
 module Saturn_queue_unsafe : QUEUE = struct
-  include Saturn_lockfree.Queue_unsafe
+  include Saturn.Queue_unsafe
 
   let push_exn = push
 end
 
 module Saturn_stack : QUEUE = struct
-  include Saturn_lockfree.Stack
+  include Saturn.Stack
 
   let push_exn = push
 end
@@ -27,13 +27,13 @@ let benchmarks_seq =
     ( name "protected_Stdlib.Queue",
       let module Bench = Seq_bench.Make ((Stdlib_ds.Locked_queue : QUEUE)) in
       Bench.run_suite );
-    ( name "Saturn_lockfree.Queue",
+    ( name "Saturn.Queue",
       let module Bench = Seq_bench.Make ((Saturn_queue : QUEUE)) in
       Bench.run_suite );
-    ( name "Saturn_lockfree.Queue_unsafe",
+    ( name "Saturn.Queue_unsafe",
       let module Bench = Seq_bench.Make ((Saturn_queue_unsafe : QUEUE)) in
       Bench.run_suite );
-    ( name "Saturn_lockfree_Two-stack_Queue",
+    ( name "Saturn_Two-stack_Queue",
       let module Bench = Seq_bench.Make ((Two_stack_queue : QUEUE)) in
       Bench.run_suite );
     ( name "Stdlib_Stack",
@@ -48,7 +48,7 @@ let benchmarks_seq =
     ( name "Optimed_Atomic_list_Stack",
       let module Bench = Seq_bench.Make ((Basic_stack : QUEUE)) in
       Bench.run_suite );
-    ( name "Saturn_lockfree.Stack",
+    ( name "Saturn.Stack",
       let module Bench = Seq_bench.Make ((Saturn_stack : QUEUE)) in
       Bench.run_suite );
   ]
@@ -59,16 +59,16 @@ let benchmarks_par =
     ( name "Stdlib_Queue_with_mutex",
       let module Bench = Par_bench.Make ((Stdlib_ds.Locked_queue : QUEUE)) in
       Bench.run_suite );
-    ( name "Saturn_lockfree_Queue",
+    ( name "Saturn_Queue",
       let module Bench = Par_bench.Make ((Saturn_queue : QUEUE)) in
       Bench.run_suite );
     (* ( name "Optimized_MS_queue",
        let module Bench = Par_bench.Make ((Michael_scott_queue : QUEUE)) in
        Bench.run_suite ); *)
-    ( name "Saturn_lockfree.Queue_unsafe",
+    ( name "Saturn.Queue_unsafe",
       let module Bench = Par_bench.Make ((Saturn_queue_unsafe : QUEUE)) in
       Bench.run_suite );
-    ( name "Saturn_lockfree_Two-stack_Queue",
+    ( name "Saturn_Two-stack_Queue",
       let module Bench = Par_bench.Make ((Two_stack_queue : QUEUE)) in
       Bench.run_suite );
     ( name "Stdlib_Stack_with_mutex",
@@ -80,7 +80,7 @@ let benchmarks_par =
     ( name "Optized_Atomic_list_Stack",
       let module Bench = Par_bench.Make ((Basic_stack : QUEUE)) in
       Bench.run_suite );
-    ( name "Saturn_lockfree_Stack",
+    ( name "Saturn_Stack",
       let module Bench = Par_bench.Make ((Saturn_stack : QUEUE)) in
       Bench.run_suite );
   ]

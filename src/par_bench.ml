@@ -59,7 +59,7 @@ module Make (Queue : QUEUE) = struct
     |> Times.to_thruput_metrics ~n:n_msgs ~singular:"message" ~config
 
   let run_suite ~budgetf =
-    Util.cross [ 1; 2 ] [ 1; 2 ]
+    Util.cross [ 1; 2; 3 ] [ 1; 2; 3 ]
     |> List.concat_map @@ fun (n_adders, n_takers) ->
        run_one ~budgetf ~n_adders ~n_takers ()
 end

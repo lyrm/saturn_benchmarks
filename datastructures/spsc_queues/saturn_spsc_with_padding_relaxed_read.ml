@@ -99,7 +99,7 @@ let pop_opt t = pop_or_peek_as t Pop Option
 let peek_exn t = pop_or_peek_as t Peek Value
 let peek_opt t = pop_or_peek_as t Peek Option
 
-let size t =
+let length t =
   let tail = Atomic.get t.tail in
   let head = Atomic.fenceless_get t.head in
   tail - head
